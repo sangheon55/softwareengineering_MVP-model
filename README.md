@@ -15,7 +15,15 @@ CLIP ViT-L/14 모델로 SNS에 올릴 후보 사진을 분석해, **기존 피�
 랭킹해 주는 웹 서비스입니다.
 
 > 소프트웨어공학 팀 프로젝트 — MVP 단계 구현체
-> (외부 서버·DB 없이 전부 localhost에서 동작)
+
+## 🌐 라이브 데모
+
+- **웹 서비스**: https://sangheon55.github.io/softwareengineering_MVP-model/
+- **백엔드 (Hugging Face Space)**: https://huggingface.co/spaces/heon55/pickture
+
+> 프론트엔드는 GitHub Pages, 백엔드(FastAPI + CLIP)는 Hugging Face Spaces에
+> 배포되어 있습니다. 배포 방법은 [DEPLOY.md](DEPLOY.md)를 참고하세요.
+> 아래 "설치 / 실행"은 로컬 개발용 안내입니다.
 
 ---
 
