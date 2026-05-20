@@ -1,0 +1,24 @@
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Hugging Face / 모델 캐시 (로컬에 별도 저장됨, 약 1.7GB)
+.cache/
+*.safetensors
+*.bin
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 로그
+*.log

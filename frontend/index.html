@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pick!ture — AI 사진 자동 선별</title>
+  <link rel="stylesheet" href="/static/style.css?v=2" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>pick<span class="accent">!</span>ture</h1>
+    <p class="tagline">AI가 골라주는 SNS 최적의 사진</p>
+  </header>
+
+  <main class="container">
+    <form id="analyze-form">
+      <section class="card">
+        <h2><span class="step">1</span> 기준 피드 등록</h2>
+        <p class="hint">내 기존 게시물 사진 5~10장을 올려 스타일을 학습시켜요.</p>
+        <label class="file-drop" for="reference-input">
+          <span>기준 피드 사진 선택</span>
+          <input id="reference-input" type="file" accept="image/*" multiple hidden />
+        </label>
+        <div id="reference-preview" class="thumb-strip"></div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">2</span> 후보 사진 업로드</h2>
+        <p class="hint">올릴까 고민 중인 사진을 최대 30장까지 올려요.</p>
+        <label class="file-drop" for="candidate-input">
+          <span>후보 사진 선택</span>
+          <input id="candidate-input" type="file" accept="image/*" multiple hidden />
+        </label>
+        <div id="candidate-preview" class="thumb-strip"></div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">3</span> 분위기 (선택)</h2>
+        <p class="hint">원하는 톤앤매너를 단어로 적으면 추천에 반영돼요.</p>
+        <input id="mood-input" type="text" class="text-input"
+               placeholder="예: 따뜻하고 차분한 감성, 미니멀" />
+      </section>
+
+      <section class="card">
+        <h2><span class="step">4</span> 분석 설정</h2>
+        <div class="slider-row">
+          <label for="vibe-slider">
+            피드 조화도 가중치
+            <span id="weight-label" class="value">0.80 / 0.20</span>
+          </label>
+          <input id="vibe-slider" type="range" min="0" max="1" step="0.05" value="0.8" />
+          <small>왼쪽: 미학 중시 · 오른쪽: 피드 일관성 중시</small>
+        </div>
+        <div class="slider-row">
+          <label for="threshold-slider">
+            미학 하드 필터 임계값
+            <span id="threshold-label" class="value">3.5</span>
+          </label>
+          <input id="threshold-slider" type="range" min="0" max="10" step="0.5" value="3.5" />
+          <small>이 점수 미만의 사진은 랭킹에서 제외돼요.</small>
+        </div>
+      </section>
+
+      <button id="analyze-btn" type="submit" class="primary-btn">분석하기</button>
+    </form>
+
+    <div id="status" class="status" hidden></div>
+
+    <section id="results" hidden>
+      <h2 class="results-title">추천 랭킹</h2>
+      <p id="results-meta" class="hint"></p>
+      <div id="ranked-list" class="result-grid"></div>
+
+      <div id="filtered-block" hidden>
+        <h3 class="filtered-title">하드 필터로 제외된 사진</h3>
+        <div id="filtered-list" class="result-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="preview-modal" class="modal" hidden>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>피드 미리보기</h3>
+        <button id="modal-close" type="button" class="close-btn">&times;</button>
+      </div>
+      <p class="hint">선택한 사진을 기존 피드 맨 앞에 배치했을 때의 모습이에요.</p>
+      <div id="feed-grid" class="feed-grid"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=2"></script>
+</body>
+</html>

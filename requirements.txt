@@ -1,0 +1,14 @@
+# pick!ture MVP dependencies
+#
+# IMPORTANT: install torch (CPU build) FIRST, separately, so pip does not
+# pull the large CUDA wheels:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# then:
+#   pip install -r requirements.txt
+
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+transformers==4.48.0
+pillow==11.1.0
+numpy==2.2.1
