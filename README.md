@@ -1,4 +1,3 @@
-<!-- 아래 YAML 블록은 Hugging Face Spaces 설정용입니다. GitHub에서는 표로 보일 수 있습니다. -->
 ---
 title: pick!ture
 emoji: 📸
