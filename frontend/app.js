@@ -1,5 +1,10 @@
 "use strict";
 
+// 백엔드 주소. 로컬 개발(같은 서버에서 서빙)에서는 "" 그대로 두고,
+// GitHub Pages 배포 시에는 Hugging Face Space 주소로 바꾼다.
+// 예: "https://사용자명-pickture.hf.space"
+const API_BASE = "";
+
 const $ = (id) => document.getElementById(id);
 
 const refInput = $("reference-input");
@@ -157,7 +162,7 @@ $("analyze-form").addEventListener("submit", async (e) => {
     false);
 
   try {
-    const res = await fetch("/analyze", { method: "POST", body: form });
+    const res = await fetch(`${API_BASE}/analyze`, { method: "POST", body: form });
     const data = await res.json();
     if (!res.ok) {
       setStatus(data.error || "분석 중 오류가 발생했어요.", true);

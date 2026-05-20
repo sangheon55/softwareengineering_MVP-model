@@ -1,3 +1,14 @@
+<!-- 아래 YAML 블록은 Hugging Face Spaces 설정용입니다. GitHub에서는 표로 보일 수 있습니다. -->
+---
+title: pick!ture
+emoji: 📸
+colorFrom: pink
+colorTo: purple
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # pick!ture — AI 기반 SNS 사진 자동 선별 서비스 (MVP)
 
 CLIP ViT-L/14 모델로 SNS에 올릴 후보 사진을 분석해, **기존 피드 스타일과의

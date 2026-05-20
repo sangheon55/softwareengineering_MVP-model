@@ -5,7 +5,8 @@ import io
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, UploadFile
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
 
@@ -17,6 +18,15 @@ MAX_CANDIDATES = 30
 THUMBNAIL_SIZE = (320, 320)
 
 app = FastAPI(title="pick!ture MVP")
+
+# 프론트엔드를 GitHub Pages 등 다른 도메인에서 서빙할 때 /analyze 호출을
+# 허용하기 위한 CORS 설정. 데모 단계라 모든 출처를 허용한다.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.middleware("http")
@@ -54,11 +64,6 @@ def _thumbnail_data_uri(img: Image.Image):
     thumb.save(buf, format="JPEG", quality=85)
     b64 = base64.b64encode(buf.getvalue()).decode("ascii")
     return f"data:image/jpeg;base64,{b64}"
-
-
-@app.get("/")
-def index():
-    return FileResponse(FRONTEND_DIR / "index.html")
 
 
 @app.post("/analyze")
@@ -115,4 +120,8 @@ async def analyze(
     })
 
 
-app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+# 정적 프론트엔드를 루트에 마운트한다(html=True 로 / → index.html).
+# /analyze 같은 명시적 라우트가 우선하므로 충돌하지 않는다.
+# GitHub Pages 배포 시에는 이 마운트가 쓰이지 않지만, HF Space 단독
+# 접속이나 로컬 개발에서는 그대로 UI를 띄워 준다.
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
