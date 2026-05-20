@@ -3,7 +3,7 @@
 // 백엔드 주소. 로컬 개발(같은 서버에서 서빙)에서는 "" 그대로 두고,
 // GitHub Pages 배포 시에는 Hugging Face Space 주소로 바꾼다.
 // 예: "https://사용자명-pickture.hf.space"
-const API_BASE = "";
+const API_BASE = "https://heon55-pickture.hf.space";
 
 const $ = (id) => document.getElementById(id);
 
